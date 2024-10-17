@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pendaftaran {
+  id              Int      @id @default(autoincrement())
+  nisn            String   @unique
+  namaLengkap     String
+  jenisKelamin    String
+  tempatLahir     String
+  tanggalLahir    DateTime
+  noHp            String
+  email           String   @unique
+  agama           String
+  tinggiBadan     Int
+  kondisiMata     String
+  riwayatPenyakit String?
+  alamatDomisili  String
+  alamatKK        String
+  jurusanUtama    String
+  jurusanCadangan String
+  raporFile       String
+  fotoFile        String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  nilaitotal      Float
+  status          String
+}
