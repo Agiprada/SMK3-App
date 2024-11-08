@@ -50,6 +50,7 @@ export default function PendaftaranForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    
     const submitData = new FormData();
     
     Object.entries(formData).forEach(([key, value]) => {

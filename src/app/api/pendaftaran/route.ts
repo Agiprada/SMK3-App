@@ -26,6 +26,15 @@ export async function POST(request: Request) {
     const jurusanCadangan = formData.get('jurusanCadangan') as string;
     const nilaitotal = parseFloat(formData.get('nilaitotal') as string) || null;
 
+    // Cek apakah NISN sudah ada
+    const existingPendaftaran = await prisma.pendaftaran.findUnique({
+      where: { nisn },
+    });
+
+    if (existingPendaftaran) {
+      return NextResponse.json({ message: 'NISN sudah digunakan.' }, { status: 400 });
+    }
+
     // Handle file uploads
     const fotoFile = formData.get('fotoFile') as File;
     const raporFile = formData.get('raporFile') as File;
@@ -78,5 +87,72 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error in pendaftaran:', error);
     return NextResponse.json({ message: 'Terjadi kesalahan saat mendaftar' }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const { id, status } = await request.json(); // Ambil ID dan status dari body permintaan
+
+    // Tentukan status yang akan diperbarui
+    const updatedStatus = status === 'Menunggu' ? 'Menunggu' : 'Verified';
+
+    const updatedPendaftaran = await prisma.pendaftaran.update({
+      where: { id: Number(id) },
+      data: { status: updatedStatus },
+    });
+
+    return NextResponse.json({ message: `Status berhasil diubah menjadi ${updatedStatus}`, data: updatedPendaftaran }, { status: 200 });
+  } catch (error) {
+    console.error('Error in updating status:', error);
+    return NextResponse.json({ message: 'Terjadi kesalahan saat mengubah status' }, { status: 500 });
+  }
+}
+
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id'); // Ambil NISN dari query parameter
+
+    if (!id) {
+      return NextResponse.json({ message: 'id tidak diberikan.' }, { status: 400 });
+    }
+
+    const pendaftaran = await prisma.pendaftaran.findUnique({
+      where: { id : Number(id) },
+      select: {
+        nisn: true,
+        namaLengkap: true,
+        jenisKelamin: true,
+        tempatLahir: true,
+        tanggalLahir: true,
+        noHp: true,
+        email: true,
+        agama: true,
+        alamatDomisili: true,
+        alamatKK: true,
+        jurusanUtama: true,
+        jurusanCadangan: true,
+        nilaitotal: true,
+        status: true,
+        tinggiBadan: true,
+        kondisiMata: true,
+        riwayatPenyakit: true,
+        raporFile: true,
+        fotoFile: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!pendaftaran) {
+      return NextResponse.json({ message: 'Pendaftaran tidak ditemukan.' }, { status: 404 });
+    }
+
+    return NextResponse.json({ data: pendaftaran }, { status: 200 });
+  } catch (error) {
+    console.error('Error in fetching pendaftaran:', error);
+    return NextResponse.json({ message: 'Terjadi kesalahan saat mengambil data pendaftaran' }, { status: 500 });
   }
 }
