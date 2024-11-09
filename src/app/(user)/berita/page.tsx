@@ -1,7 +1,10 @@
+import Berita from '@/components/user/Berita'
 import React from 'react'
 
 export default function UserBerita() {
   return (
-    <div>User Berita</div>
+    <div className='mt-10'>
+      <Berita />
+    </div>
   )
 }
