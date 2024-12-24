@@ -78,7 +78,7 @@ export async function POST(request: Request) {
         jurusanCadangan,
         fotoFile: fotoFileName,
         raporFile: raporFileName,
-        nilaitotal,
+        nilaitotal: nilaitotal !== null ? nilaitotal : 0, // Ensure nilaitotal is always a number
         status: 'Menunggu', // Status awal
       },
     });
