@@ -65,11 +65,11 @@ export async function POST(request: Request) {
         namaLengkap,
         jenisKelamin,
         tempatLahir,
-        tanggalLahir: formattedTanggalLahir,
+        tanggalLahir: formattedTanggalLahir || new Date(), // Provide a default value
         noHp,
         email,
         agama,
-        tinggiBadan,
+        tinggiBadan: tinggiBadan !== null ? tinggiBadan : 0,
         kondisiMata,
         riwayatPenyakit,
         alamatDomisili,
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
         jurusanCadangan,
         fotoFile: fotoFileName,
         raporFile: raporFileName,
-        nilaitotal,
+        nilaitotal: nilaitotal !== null ? nilaitotal : 0, // Ensure nilaitotal is always a number
         status: 'Menunggu', // Status awal
       },
     });
