@@ -10,7 +10,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white w-64 min-h-screen p-4">
+    <nav className="bg-gray-800 text-white w-52 min-h-screen p-4 fixed">
       <div className="mb-8">
         <h2 className="text-2xl font-semibold">Admin Panel</h2>
       </div>

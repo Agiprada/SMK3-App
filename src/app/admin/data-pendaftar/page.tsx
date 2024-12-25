@@ -8,6 +8,8 @@ async function getPendaftar() {
       namaLengkap: true,
       email: true,
       noHp: true,
+      jurusanUtama: true,
+      jurusanCadangan: true,
       createdAt: true,
       status: true,
       nilaitotal: true,

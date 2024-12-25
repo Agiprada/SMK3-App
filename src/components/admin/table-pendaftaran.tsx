@@ -10,6 +10,8 @@ type Pendaftar = {
     namaLengkap: string
     email: string
     noHp: string
+    jurusanUtama: string
+    jurusanCadangan: string
     createdAt: string  // Ubah ini dari Date menjadi string
     status: string
     nilaitotal: number
@@ -24,11 +26,22 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [statusFilter, setStatusFilter] = useState('All')
 
-  const filteredData = dataPendaftar.filter((pendaftar) =>
-    pendaftar.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    pendaftar.email.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredData = dataPendaftar.filter((pendaftar) => {
+    // Filter data berdasarkan pencarian dan status
+    const matchesSearch =
+      pendaftar.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) || // Cocokkan nama lengkap
+      pendaftar.email.toLowerCase().includes(searchTerm.toLowerCase()) || // Cocokkan email
+      pendaftar.jurusanUtama.toLowerCase().includes(searchTerm.toLowerCase()) || // Cocokkan jurusan utama
+      pendaftar.jurusanCadangan.toLowerCase().includes(searchTerm.toLowerCase()) // Cocokkan jurusan cadangan
+  
+    const matchesStatus =
+      statusFilter === 'All' || // Jika filter status 'All', tampilkan semua data
+      pendaftar.status.toLowerCase() === statusFilter.toLowerCase() // Cocokkan status
+  
+    return matchesSearch && matchesStatus
+  })
 
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -39,6 +52,7 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-1">
+        <div className='flex justify-between'>
         <h1 className="text-2xl font-semibold leading-tight">Data Pendaftar</h1>
         <div className="my-2 flex sm:flex-row flex-col">
           <div className="flex flex-row mb-1 sm:mb-0">
@@ -54,6 +68,18 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
               </select>
             </div>
           </div>
+
+          <div className="flex flex-row mb-1 sm:mb-0">
+            <div className="relative">
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
+                  className="appearance-none h-full border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                  <option>All</option>
+                  <option>Menunggu</option>
+                  <option>Verified</option>
+              </select>
+            </div>
+          </div>
+
           <div className="block relative">
             <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
               <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -68,6 +94,8 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
             />
           </div>
         </div>
+        </div>
+        
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="min-w-full leading-normal">
@@ -77,13 +105,10 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
                     Nama
                   </th>
                   <th className="px-5 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Email
+                    J. Utama
                   </th>
                   <th className="px-5 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    No. Telp
-                  </th>
-                  <th className="px-5 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Tanggal Daftar
+                    J. Cadangan
                   </th>
                   <th className="px-5 py-1 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Nilai Total
@@ -100,32 +125,26 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
                 {currentItems.map((pendaftar) => (
                   <tr key={pendaftar.id}>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">{pendaftar.namaLengkap}</p>
+                      {pendaftar.namaLengkap}
                     </td>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">{pendaftar.email}</p>
+                      {pendaftar.jurusanUtama}
                     </td>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">{pendaftar.noHp}</p>
+                      {pendaftar.jurusanCadangan}
                     </td>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {format(new Date(pendaftar.createdAt), 'dd/MM/yyyy')}
-                      </p>
+                      {pendaftar.nilaitotal.toFixed(2)}
                     </td>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">{pendaftar.nilaitotal.toFixed(2)}</p>
-                    </td>
-                    <td className='text-center'>
-                        <Link href={`/admin/data-pendaftar/${pendaftar.id}`} className='text-blue-500 hover:text-blue-700'>
-                          <BsInfoSquareFill size={25} />
-                        </Link>
+                    <Link
+                        href={`/admin/data-pendaftar/${pendaftar.id}`}
+                        className="text-blue-500 hover:text-blue-700"
+                       ><BsInfoSquareFill size={25} />
+                      </Link>
                     </td>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                      <span className={`relative inline-block px-3 py-1 font-semibold text-${pendaftar.status === 'Diterima' ? 'green' : pendaftar.status === 'Ditolak' ? 'red' : 'orange'}-900 leading-tight`}>
-                        <span aria-hidden className={`absolute inset-0 bg-${pendaftar.status === 'Diterima' ? 'green' : pendaftar.status === 'Ditolak' ? 'red' : 'orange'}-200 opacity-50 rounded-full`}></span>
-                        <span className="relative">{pendaftar.status}</span>
-                      </span>
+                      {pendaftar.status}
                     </td>
                   </tr>
                 ))}
