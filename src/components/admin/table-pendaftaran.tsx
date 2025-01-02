@@ -144,7 +144,9 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
                       </Link>
                     </td>
                     <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                      <div className={`p-1 rounded-md font-semibold ${pendaftar.status === "Menunggu" ? "text-yellow-500" : pendaftar.status === "Verified" ? "text-green-500" : "text-white" }`}>
                       {pendaftar.status}
+                      </div>
                     </td>
                   </tr>
                 ))}
