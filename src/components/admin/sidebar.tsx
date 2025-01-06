@@ -1,9 +1,14 @@
 "use client"
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaHome, FaTachometerAlt } from 'react-icons/fa';
 import { BsClipboardData } from 'react-icons/bs';
 import { FaRankingStar } from 'react-icons/fa6';
+import { VscSignOut } from "react-icons/vsc";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import LogoutButton from './LogoutButton';
 
 const Sidebar = () => {
   const [isDataPendaftarOpen, setIsDataPendaftarOpen] = useState(false);
@@ -15,30 +20,38 @@ const Sidebar = () => {
   return (
     <nav className="bg-gray-800 text-white  w-48 min-h-screen p-4 fixed">
       <div className="">
-        <h2 className="text-2xl font-semibold">Admin Panel</h2>
+      <Image src="/images/logo-smkn3palu.png" width="150" alt="logo smk" height="10"></Image>
       </div>
       <ul>
         {/* Dashboard */}
-        <li className="mb-4">
-          <Link href="/admin/dashboard" className="hover:text-gray-300 pl-2">
+        <li className="pt-4">
+          <Link href="/admin/dashboard" className="block hover:bg-gray-500 rounded-md p-2 ">
           <div className='flex items-center'>
             <FaHome size={20}/>
             <span className="ml-2">Dashboard</span>
           </div>
           </Link>
         </li>
-        <li className="flex mb-4 items-center">
-          <BsClipboardData />
-          <Link href="/admin/data-pendaftar" className="block hover:text-gray-300 pl-2">
-            Data Pendaftar
+        <li className="">
+          <Link href="/admin/data-pendaftar" className="block hover:bg-gray-500 rounded-md p-2 ">
+            <div className='flex items-center'>
+              <BsClipboardData size={20} />
+              <span className='ml-2'>Data Pendaftar</span>
+            </div>
           </Link>
         </li>
 
-        <li className="flex mb-4 items-center">
-          <FaRankingStar />
-          <Link href="/admin/perangkingan" className="block hover:text-gray-300 pl-2">
-            Ranking
+        <li className="mb-4">
+          <Link href="/admin/perangkingan" className="block hover:bg-gray-500 rounded-md p-2">
+            <div className='flex items-center'>
+              <FaRankingStar size={20} />
+              <span className='ml-2'>Ranking</span>
+            </div>
           </Link>
+        </li>
+
+        <li className="mb-4">
+          <LogoutButton />
         </li>
 
         {/* Data Pendaftar */}
@@ -65,22 +78,6 @@ const Sidebar = () => {
             </ul>
           )}
         </li> */}
-
-        {/* Data Siswa */}
-        <li className="flex mb-4 items-center">
-          <FaTachometerAlt />
-          <Link href="/admin/data-siswa" className="block hover:text-gray-300 pl-2">
-            Data Siswa
-          </Link>
-        </li>
-
-        {/* Data Tempat Magang */}
-        <li className="flex mb-4 items-center">
-          <FaTachometerAlt />
-          <Link href="/admin/magang" className="block hover:text-gray-300 pl-2">
-            Tempat Magang
-          </Link>
-        </li>
       </ul>
     </nav>
   );
