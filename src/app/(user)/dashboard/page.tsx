@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function DashboardUser() {
   return (
-    <div>
+    <div className=''>
         <Hero/>
         <Profile />
         <Jurusan/>

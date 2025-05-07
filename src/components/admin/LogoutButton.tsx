@@ -8,7 +8,7 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await signOut({ redirect: false }); // Logout tanpa redirect otomatis
-    router.push("/login"); // Redirect ke halaman login
+    router.push("/auth/admin/login"); // Redirect ke halaman login
   };
 
   return (

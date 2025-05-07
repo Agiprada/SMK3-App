@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Jurusan() {
   return (
-    <div className='w-screen bg-red-500 mt-5'>
+    <div className=' bg-red-500 mt-5'>
         <div className='grid grid-cols-2 pt-8 pb-8 '>
             <div className='px-5'>
                 <h1 className='text-white text-4xl font-bold mb-5'>Program Keahlian</h1>

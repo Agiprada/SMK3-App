@@ -124,26 +124,26 @@ export default function TableDataPendaftar({ dataPendaftar }: TableDataPendaftar
               <tbody>
                 {currentItems.map((pendaftar) => (
                   <tr key={pendaftar.id}>
-                    <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                       {pendaftar.namaLengkap}
                     </td>
-                    <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                       {pendaftar.jurusanUtama}
                     </td>
-                    <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                       {pendaftar.jurusanCadangan}
                     </td>
-                    <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                       {pendaftar.nilaitotal.toFixed(2)}
                     </td>
-                    <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                     <Link
                         href={`/admin/data-pendaftar/${pendaftar.id}`}
                         className="text-blue-500 hover:text-blue-700"
                        ><BsInfoSquareFill size={25} />
                       </Link>
                     </td>
-                    <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                       <div className={`p-1 rounded-md font-semibold ${pendaftar.status === "Menunggu" ? "text-yellow-500" : pendaftar.status === "Verified" ? "text-green-500" : "text-white" }`}>
                       {pendaftar.status}
                       </div>

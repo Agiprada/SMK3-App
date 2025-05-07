@@ -18,7 +18,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-3">
-            <Link href="/login" className="py-2 px-2 font-medium text-white rounded hover:bg-blue-500 transition duration-300">Log Out</Link>
+            <Link href="auth/users/login" className="py-2 px-2 font-medium text-white rounded hover:bg-blue-500 transition duration-300">Login</Link>
           </div>
         </div>
       </div>
