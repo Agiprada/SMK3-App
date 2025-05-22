@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Navbar = () => {
   return (
@@ -7,8 +8,8 @@ const Navbar = () => {
         <div className="flex justify-between">
           <div className="flex space-x-7">
             <div>
-              <Link href="/user/dashboard" className="flex items-center py-4 px-2">
-                <span className="font-semibold text-lg">PSB Online</span>
+              <Link href="/user/dashboard" className="flex items-center py-2 px-2">
+              <Image src="/images/logo-smkn3palu.png" width="70" alt="logo smk" height="10"></Image>
               </Link>
             </div>
             <div className="hidden md:flex items-center space-x-1">
@@ -17,9 +18,9 @@ const Navbar = () => {
               <Link href="/pendaftaran" className="py-4 px-2 hover:text-blue-200 transition duration-300">Pendaftaran</Link>
             </div>
           </div>
-          <div className="hidden md:flex items-center space-x-3">
+          {/* <div className="hidden md:flex items-center space-x-3">
             <Link href="auth/users/login" className="py-2 px-2 font-medium text-white rounded hover:bg-blue-500 transition duration-300">Login</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

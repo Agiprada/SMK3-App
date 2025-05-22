@@ -9,6 +9,7 @@ import { VscSignOut } from "react-icons/vsc";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import LogoutButton from './LogoutButton';
+import { TfiAnnouncement } from 'react-icons/tfi';
 
 const Sidebar = () => {
   const [isDataPendaftarOpen, setIsDataPendaftarOpen] = useState(false);
@@ -41,7 +42,7 @@ const Sidebar = () => {
           </Link>
         </li>
 
-        <li className="mb-4">
+        <li className="">
           <Link href="/admin/perangkingan" className="block hover:bg-gray-500 rounded-md p-2">
             <div className='flex items-center'>
               <FaRankingStar size={20} />
@@ -51,33 +52,17 @@ const Sidebar = () => {
         </li>
 
         <li className="mb-4">
-          <LogoutButton />
+          <Link href="/admin/pengumuman" className="block hover:bg-gray-500 rounded-md p-2">
+            <div className='flex items-center'>
+              <TfiAnnouncement size={20} />
+              <span className='ml-2'>Pengumuman</span>
+            </div>
+          </Link>
         </li>
 
-        {/* Data Pendaftar */}
-        {/* <li className="mb-4">
-          <button
-            onClick={toggleSubmenu}
-            className="w-full text-left flex items-center justify-between hover:text-gray-300"
-          >
-            <span>Data Pendaftar</span>
-            <span>{isDataPendaftarOpen ? '▼' : '▶'}</span>
-          </button>
-          {isDataPendaftarOpen && (
-            <ul className="pl-4 mt-2 space-y-2">
-              <li>
-                <Link href="/admin/data-pendaftar" className="block hover:text-gray-300">
-                  Semua Pendaftar
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/perangkingan" className="block hover:text-gray-300">
-                  Perangkingan
-                </Link>
-              </li>
-            </ul>
-          )}
-        </li> */}
+        <li className="mb-4">
+          <LogoutButton />
+        </li>
       </ul>
     </nav>
   );

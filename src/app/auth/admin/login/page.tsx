@@ -3,7 +3,8 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import  Swal  from "sweetalert2"
+ 
 export default function AdminLoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +24,13 @@ export default function AdminLoginForm() {
       setError(result.error);
     } else {
       router.push("/admin/dashboard");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Sukses",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   };
 
