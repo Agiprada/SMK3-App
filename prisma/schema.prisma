@@ -49,3 +49,12 @@ model User {
   nama      String?
   alamat    String?
 }
+
+model Pengumuman {
+  id        Int      @id @default(autoincrement())
+  judul     String
+  isi       String
+  dokument  String
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
