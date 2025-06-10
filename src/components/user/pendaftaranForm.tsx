@@ -80,7 +80,7 @@ export default function PendaftaranForm() {
   };
 
   return (
-    <div className='w-full my-10 mt-20'>
+    <div className='w-full my-10 mt-10'>
     <form onSubmit={handleSubmit} className="bg-gray-100 shadow-lg rounded px-8 pt-6 pb-8 mb-4 mx-32">
       <h1 className='text-center uppercase text-2xl font-bold font-serif'>biodata diri</h1>
       <div className="relative z-0 w-full mb-5 group">

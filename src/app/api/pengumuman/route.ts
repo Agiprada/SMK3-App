@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       
       try {
         await writeFile(`${uploadDir}/${filename}`, buffer)
-        dokumentPath = `/uploads/${filename}`
+        dokumentPath = `/uploads/pengumuman/${filename}`
       } catch (error) {
         console.error('Error saving file:', error)
         return NextResponse.json(

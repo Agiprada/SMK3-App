@@ -16,6 +16,7 @@ const Navbar = () => {
               <Link href="/dashboard" className="py-4 px-2 hover:text-blue-200 transition duration-300">Dashboard</Link>
               <Link href="/berita" className="py-4 px-2 hover:text-blue-200 transition duration-300">Berita</Link>
               <Link href="/pendaftaran" className="py-4 px-2 hover:text-blue-200 transition duration-300">Pendaftaran</Link>
+              <Link href="/pengumuman" className="py-4 px-2 hover:text-blue-200 transition duration-300">Pengumuman</Link>
             </div>
           </div>
           {/* <div className="hidden md:flex items-center space-x-3">

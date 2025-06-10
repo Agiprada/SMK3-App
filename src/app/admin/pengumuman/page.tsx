@@ -11,7 +11,7 @@ interface Pengumuman {
   id: number
   judul: string
   isi: string
-  dokumen: string | null
+  dokument: string | null
   createAt: string
   updatedAt: string
 }
@@ -132,7 +132,7 @@ export default function Pengumuman() {
                     <td className='px-4 py-3'>{formatDate(item.createAt)}</td>
                     <td className='px-4 py-3 flex justify-center gap-2'>
                       <Link 
-                        href={`/admin/pengumuman/${item.id}`}
+                        href={`/admin/pengumuman/detail/${item.id}`}
                         className='bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md transition-colors'
                         title='Detail'
                       >
